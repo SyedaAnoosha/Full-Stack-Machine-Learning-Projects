@@ -1,5 +1,3 @@
-# main.py
-
 from fastapi import FastAPI
 from schemas import PCOSPredictionRequest
 import joblib
@@ -29,10 +27,8 @@ def root():
 
 @app.post("/predict")
 def predict(data: PCOSPredictionRequest):
-    # Extract data
     input_data = data.dict()
     
-    # Convert blood_group to numeric encoding
     blood_group_map = {
         "A+": 0,
         "A-": 1,
@@ -45,7 +41,6 @@ def predict(data: PCOSPredictionRequest):
     }
     input_data['blood_group'] = blood_group_map.get(input_data['blood_group'], -1)  # default -1 for unknown
     
-    # Prepare feature vector for model (order must match training)
     features = [
         input_data['age'],
         input_data['bmi'],
@@ -67,11 +62,8 @@ def predict(data: PCOSPredictionRequest):
         input_data['blood_group']
     ]
     
-    # Here call your ML model for prediction
-    # e.g. prediction, risk_score = model.predict(features)
-    
-    # Dummy example response
-    prediction = 1  # 1 means PCOS positive, 0 means negative
-    risk_score = 0.78  # example risk score from 0 to 1
+
+    prediction = 1  
+    risk_score = 0.78  
     
     return {"prediction": prediction, "risk_score": risk_score}
