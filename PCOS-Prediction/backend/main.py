@@ -11,17 +11,15 @@ app = FastAPI(title="PCOS Risk Predictor")
 origins = [
     "http://localhost:5173",  # Vite default port
     "http://127.0.0.1:5173",
-    # Add other origins if needed
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_methods=["*"],  # allow all HTTP methods (GET, POST, OPTIONS, etc)
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Load model & scaler
 model = joblib.load("models/pcos_model.pkl")
 scaler = joblib.load("models/scaler.pkl")
 
