@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -68,7 +67,7 @@ function App() {
     marginBottom: "4px",
     display: "block"
   };
-  
+
   const inputStyle = {
     display: "block",
     width: "100%",
