@@ -4,8 +4,22 @@ from fastapi import FastAPI
 from schemas import PCOSInput, PCOSPrediction
 import joblib
 import numpy as np
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="PCOS Risk Predictor")
+
+origins = [
+    "http://localhost:5173",  # Vite default port
+    "http://127.0.0.1:5173",
+    # Add other origins if needed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_methods=["*"],  # allow all HTTP methods (GET, POST, OPTIONS, etc)
+    allow_headers=["*"],
+)
 
 # Load model & scaler
 model = joblib.load("models/pcos_model.pkl")
